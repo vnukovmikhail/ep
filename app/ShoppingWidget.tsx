@@ -98,20 +98,38 @@ export default function ShoppingWidget() {
     }
 
     return (
-        <div style={{ maxWidth: 600, margin: "auto" }}>
-            <h2>List of products:</h2>
+        <div style={{ maxWidth: 650, margin: "auto" }}>
+            <h2 className="text-lg font-bold mb-2">List of products:</h2>
 
             <form onSubmit={handleSubmit}>
-                <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, title: e.target.value })} value={form.title} />
-                <input type="number" value={form.count} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, count: e.target.value })}/>
-                <input type="number" value={form.price} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, price: e.target.value })}/>
-                <button type="submit">Add!</button>
+                <input
+                    className="border-2 border-solid border-gray-300 rounded px-2 py-1 mb-2"
+                    placeholder="Title"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, title: e.target.value })} 
+                    value={form.title} />
+                <input 
+                    className="border-2 border-solid border-gray-300 rounded px-2 py-1 mb-2"
+                    type="number"
+                    placeholder="Count"
+                    value={form.count} 
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, count: e.target.value })}/>
+                <input 
+                    className="border-2 border-solid border-gray-300 rounded px-2 py-1 mb-2"
+                    type="number"
+                    placeholder="Price"
+                    value={form.price} 
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, price: e.target.value })}/>
+
+                <button className="bg-blue-500 text-white rounded px-4 py-1 w-full" type="submit">Add!</button>
             </form>
 
             <ul>
                 {items.map(item => (
-                <li key={item.id}>
-                    <span>{item.title} - {item.count} Price - {item.price} $</span>
+                <li key={item.id} style={{
+                    textDecoration: item.marked ? "line-through" : "none", display: "flex", gap: 8, alignItems: "center"
+                }}>
+                    <span style={{ flex: 1 }}>{item.title} - {item.count} Price - {item.price} $</span>
+
                     <button type="button" onClick={() => toggle(item.id)}>Mark</button>
                     <button type="button" onClick={() => edit(item)}>Edit</button>
                     <button type="button" onClick={() => remove(item.id)}>Remove</button>
