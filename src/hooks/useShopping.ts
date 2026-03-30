@@ -54,7 +54,13 @@ export function useShopping() {
     // small truff
     const toggle = (id: number) => setItems(items.map(i => i.id === id ? { ...i, marked: !i.marked } : i));
 
-    const remove = (id: number) => setItems(items.filter(i => i.id !== id));
+    const remove = (id: number) => {
+        const isConfirmed = window.confirm("Are you sure you want to delete this product? >:^}");
+
+        if (isConfirmed) {
+            setItems(items.filter(i => i.id !== id));
+        }
+    }
     
     const edit = (item: Item) => setForm({ id: item.id, title: item.title, count: String(item.count), price: String(item.price) });
 
