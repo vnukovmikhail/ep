@@ -73,6 +73,16 @@ export default function ShoppingWidget() {
           </li>
         ))}
       </ul>
+
+      {items.length > 0 && (
+        <div className="mt-4 pt-2 flex justify-between items-center text-white-600">
+          <span className="text-sm uppercase tracking-wider font-semibold">Total Est.</span>
+          <span className="text-2xl font-white font-bold">
+            {/* сумма всех товаров, а ту фиксед для десятичных, сотых, после запятой */}
+            ${items.reduce((acc, item) => acc + (item.price * item.count), 0).toFixed(2)}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
