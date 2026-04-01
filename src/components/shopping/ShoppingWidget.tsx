@@ -57,7 +57,7 @@ export default function ShoppingWidget() {
         />
       </div>
 
-      <ul className="space-y-2">
+      {/* <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.id} className="flex items-center gap-3 p-2 border-b">
             <span 
@@ -72,7 +72,40 @@ export default function ShoppingWidget() {
             </div>
           </li>
         ))}
-      </ul>
+      </ul> */}
+
+      <table className="w-full mt-6 border-collapse">
+        <thead>
+          <tr className="border-b-2 border-gray-100 text-left">
+            <th className="pb-2 font-semibold">Title</th>
+            <th className="pb-2 font-semibold text-center">Count</th>
+            <th className="pb-2 font-semibold text-right">Price</th>
+            <th className="pb-2 font-semibold text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => (
+            <tr 
+              key={item.id} 
+              className={`border-b last:border-0 hover:bg-gray-50 transition-colors ${
+                item.marked ? "line-through text-gray-400" : ""
+              }`}
+            >
+              <td className="py-3">{item.title}</td>
+              <td className="py-3 text-center">{item.count} pcs.</td>
+              <td className="py-3 text-right">${Number(item.price).toFixed(2)}</td>
+              <td className="py-3 text-right">
+                <div className="flex justify-end gap-2 text-sm">
+                  <button className="text-green-500 hover:underline" onClick={() => toggle(item.id)}>Mark</button>
+                  <button className="text-blue-500 hover:underline" onClick={() => edit(item)}>Edit</button>
+                  <button className="text-red-500 hover:underline" onClick={() => remove(item.id)}>Delete</button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
 
       {items.length > 0 && (
         <div className="mt-4 pt-2 flex justify-between items-center text-white-600">
